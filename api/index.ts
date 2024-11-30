@@ -20,8 +20,7 @@ app.get("/", (req, res) => {
 
         // Set the cookie on the client
         res.cookie("custom-cookie", JSON.stringify(customCookie), {
-            httpOnly: true,
-            secure: false, // Set to true in an HTTPS environment
+            secure: true, // Ensure cookies are sent only over HTTPS
             path: "/",     // Make the cookie apply to all paths
             maxAge: 24 * 60 * 60 * 1000 // Valid for 1 day
         });
@@ -30,8 +29,7 @@ app.get("/", (req, res) => {
         customCookie = JSON.parse(customCookie);
         customCookie.views++;
         res.cookie("custom-cookie", JSON.stringify(customCookie), {
-            httpOnly: true,
-            secure: false,
+            secure: true,
             path: "/",
             maxAge: 24 * 60 * 60 * 1000
         });
