@@ -1,16 +1,15 @@
-import express from 'express';
-import cookieParser from 'cookie-parser';
+const express = require("express");
+const cookieParser = require("cookie-parser");
 
 const app = express();
-const PORT = 3000;
 
 // Add the cookie parser middleware
 app.use(cookieParser());
 
 // Default route
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
     // Check for custom cookie
-    let customCookie = req.cookies['custom-cookie'];
+    let customCookie = req.cookies["custom-cookie"];
 
     if (!customCookie) {
         // Create a custom cookie
@@ -20,20 +19,20 @@ app.get('/', (req, res) => {
         };
 
         // Set the cookie on the client
-        res.cookie('custom-cookie', JSON.stringify(customCookie), {
+        res.cookie("custom-cookie", JSON.stringify(customCookie), {
             httpOnly: true,
             secure: false, // Set to true in an HTTPS environment
-            path: '/',     // Make the cookie apply to all paths
+            path: "/",     // Make the cookie apply to all paths
             maxAge: 24 * 60 * 60 * 1000 // Valid for 1 day
         });
     } else {
         // Parse the cookie value and increment the view count
         customCookie = JSON.parse(customCookie);
         customCookie.views++;
-        res.cookie('custom-cookie', JSON.stringify(customCookie), {
+        res.cookie("custom-cookie", JSON.stringify(customCookie), {
             httpOnly: true,
             secure: false,
-            path: '/',
+            path: "/",
             maxAge: 24 * 60 * 60 * 1000
         });
     }
@@ -47,6 +46,8 @@ app.get('/', (req, res) => {
 });
 
 // Start the server
-app.listen(PORT, () => {
-    console.log(`Server is running on http://localhost:${PORT}`);
+app.listen(3000, () => {
+    console.log("Server ready on port 3000.");
 });
+
+module.exports = app;
