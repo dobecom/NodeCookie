@@ -9,8 +9,9 @@ app.use(cookieParser());
 // Default route
 app.get("/", (req, res) => {
     // Check for custom cookie
-    let customCookie = req.cookies["myCookie"];
+    let customCookie = req.cookies["cookie1"];
 
+    console.log(customCookie)
     if (!customCookie) {
         // Create a custom cookie
         customCookie = {
@@ -19,7 +20,7 @@ app.get("/", (req, res) => {
         };
 
         // Set the cookie on the client
-        res.cookie("myCookie", JSON.stringify(customCookie), {
+        res.cookie("cookie1", JSON.stringify(customCookie), {
             secure: true, // Ensure cookies are sent only over HTTPS
             path: "/",     // Make the cookie apply to all paths
             maxAge: 24 * 60 * 60 * 1000 // Valid for 1 day
@@ -28,7 +29,7 @@ app.get("/", (req, res) => {
         // Parse the cookie value and increment the view count
         customCookie = JSON.parse(customCookie);
         customCookie.views++;
-        res.cookie("myCookie", JSON.stringify(customCookie), {
+        res.cookie("cookie1", JSON.stringify(customCookie), {
             secure: true,
             path: "/",
             maxAge: 30 * 60 * 1000
