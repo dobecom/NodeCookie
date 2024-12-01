@@ -23,7 +23,7 @@ app.get("/", (req, res) => {
         res.cookie("cookie1", JSON.stringify(customCookie), {
             secure: true, // Ensure cookies are sent only over HTTPS
             path: "/",     // Make the cookie apply to all paths
-            maxAge: 24 * 60 * 60 * 1000 // Valid for 1 day
+            // maxAge: 30 * 60 * 1000 // comment this for persistent cookie
         });
     } else {
         // Parse the cookie value and increment the view count
@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
         res.cookie("cookie1", JSON.stringify(customCookie), {
             secure: true,
             path: "/",
-            maxAge: 30 * 60 * 1000
+            // maxAge: 30 * 60 * 1000 // comment this for persistent cookie
         });
     }
 
